@@ -1,531 +1,84 @@
-<!doctype html>
-<html lang="id">
+<!DOCTYPE html>
+<html lang="id" class="dark">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Perjalanan Evolusi & Peradaban Manusia — Interaktif</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jejak Manusia Nusantara - Interactive History</title>
 
-  <!-- Tailwind CDN (play) -->
-  <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <!-- Three.js CDN -->
-  <script src="https://unpkg.com/three@0.155.0/build/three.min.js"></script>
-
-  <style>
-    :root{
-      --navy:#0b2340; --gold:#d4af37; --earth:#7a5a3c; --soft:#f7f7f7;
-    }
-    body { font-family: "Poppins", "Nunito", sans-serif; background: linear-gradient(180deg,var(--soft),#fff); }
-    .glass { background: rgba(255,255,255,0.06); backdrop-filter: blur(6px); border-radius: 12px; }
-    /* dark mode */
-    .dark body { background: linear-gradient(180deg,#07101a,#071827); color: #dbeafe; }
-    .dark .card { background: rgba(255,255,255,0.03); }
-    /* hero globe container */
-    #hero { min-height: 66vh; }
-    /* timeline horizontal scroll */
-    .timeline-scroll::-webkit-scrollbar { height: 8px; }
-    .timeline-scroll::-webkit-scrollbar-thumb { background: linear-gradient(90deg,var(--navy),var(--earth)); border-radius: 8px; }
-    /* floating fog */
-    .fog { position: absolute; inset: 0; pointer-events:none; background: radial-gradient(ellipse at center, rgba(212,175,55,0.04), transparent 40%); mix-blend-mode: screen; }
-    /* responsive tweaks */
-    @media (max-width:768px){
-      .hero-title { font-size: 1.3rem; }
-    }
-    .badge { background: linear-gradient(90deg,#ffd97a,#d4af37); color:#071827; font-weight:700; padding:4px 8px; border-radius:999px; }
-    /* simple 3D canvas sizing */
-    #globe-canvas { width:100%; height:480px; display:block; }
-  </style>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="text-gray-900">
 
-  <!-- Top nav -->
-  <header class="p-4 flex items-center justify-between max-w-6xl mx-auto">
-    <div class="flex items-center gap-3">
-      <div class="w-12 h-12 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,var(--navy),var(--earth)); color:white; font-weight:700;">PI</div>
-      <div>
-        <div class="text-lg font-bold">Perjalanan Evolusi Indonesia</div>
-        <div class="text-xs text-gray-500">Belajar sejarah interaktif — pra-sejarah hingga era digital</div>
-      </div>
-    </div>
+<body class="antialiased selection:bg-gold selection:text-black">
 
-    <div class="flex items-center gap-3">
-      <button id="audioBtn" class="px-3 py-2 glass card rounded-md text-sm">🔊 Narasi</button>
-      <button id="modeToggle" class="px-3 py-2 glass card rounded-md text-sm">🌙 Mode Malam</button>
-    </div>
-  </header>
+    <!-- Background -->
+    <div class="stars"></div>
+    <div class="fixed inset-0 bg-radial-glow pointer-events-none z-0"></div>
 
-  <!-- HERO / Landing -->
-  <main class="max-w-6xl mx-auto px-4">
-    <section id="hero" class="relative rounded-xl overflow-hidden p-6 grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
-      <div class="relative">
-        <div class="absolute top-4 left-4 badge">Interaktif • Edukatif</div>
-        <h1 class="hero-title text-3xl md:text-4xl font-extrabold leading-tight mb-2">Perjalanan Evolusi & Peradaban Manusia di <span class="text-indigo-900 dark:text-indigo-200">Indonesia</span></h1>
-        <p class="text-gray-600 dark:text-gray-300 mb-4">Geser timeline atau klik era untuk melihat mini animasi, narasi, dan kuis singkat. Cocok untuk pelajar 10–20 tahun.</p>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 text-center py-6 animate-fade-in-down">
+        <div class="flex justify-between items-center px-8 max-w-7xl mx-auto">
+            <div class="text-gold font-serif font-bold text-xl tracking-widest">JEJAK.ID</div>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
+                <a href="#" class="hover:text-white transition-colors">Beranda</a>
+                <a href="#" class="hover:text-white transition-colors text-white">Timeline</a>
+                <a href="#" class="hover:text-white transition-colors">Quiz</a>
+                <a href="#" class="hover:text-white transition-colors">Tentang</a>
+            </nav>
+            <div class="w-8 h-8 rounded-full bg-gray-800 border border-gray-600 flex items-center justify-center text-xs">ID</div>
+        </div>
+    </header>
 
-        <div class="flex gap-3 items-center">
-          <button id="startBtn" class="px-4 py-2 rounded-lg bg-gradient-to-r from-[#0b2340] to-[#3b6b86] text-white shadow">Mulai Jelajah</button>
-          <button id="learnBtn" class="px-4 py-2 rounded-lg border border-gray-200 text-sm">Tentang Website</button>
+    <!-- MAIN CONTENT -->
+    <main class="relative h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-24 z-10">
+        
+        <div class="text-center z-30 transition-all duration-500" id="title-container">
+            <h1 id="era-title" class="text-5xl md:text-7xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 drop-shadow-2xl mb-2">
+                Paleolitikum
+            </h1>
+            <p id="era-year" class="text-gold text-lg md:text-xl font-mono tracking-widest opacity-90">
+                ±2 juta – 12.000 SM
+            </p>
+            <p id="era-desc" class="text-gray-400 max-w-lg mx-auto mt-4 text-sm md:text-base font-light leading-relaxed opacity-0 translate-y-4 transition-all duration-700 delay-100">
+                Zaman Batu Tua. Manusia hidup nomaden, berburu, dan mengumpulkan makanan.
+            </p>
         </div>
 
-        <div class="mt-6 text-sm text-gray-500 dark:text-gray-400">
-          Tip: geser timeline (kanan/kiri) atau gunakan tombol panah keyboard untuk berpindah zaman.
+        <!-- ROTATING PLANET WHEEL -->
+        <div id="planet-wheel"></div>
+
+        <!-- ARROWS -->
+        <div class="absolute bottom-12 left-0 right-0 z-50 flex justify-between px-8 md:px-24 pointer-events-none">
+            <button onclick="rotate(-1)" class="pointer-events-auto w-14 h-14 rounded-full border border-white/20 bg-black/30 backdrop-blur-md flex items-center justify-center hover:bg-white/10 hover:border-gold transition-all group">
+                <svg class="w-6 h-6 text-gray-400 group-hover:text-gold transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </button>
+            <button onclick="rotate(1)" class="pointer-events-auto w-14 h-14 rounded-full border border-white/20 bg-black/30 backdrop-blur-md flex items-center justify-center hover:bg-white/10 hover:border-gold transition-all group">
+                <svg class="w-6 h-6 text-gray-400 group-hover:text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+            </button>
         </div>
-      </div>
 
-      <!-- 3D Globe + markers -->
-      <div class="relative">
-        <div id="globeWrap" class="rounded-xl glass p-3">
-          <canvas id="globe-canvas"></canvas>
-          <div class="absolute bottom-3 left-3 flex gap-2 items-center">
-            <button id="prevEra" class="px-3 py-1 rounded-md glass">◀</button>
-            <div id="eraLabel" class="px-3 py-1 rounded-md card">Paleolitikum • ±600.000 – 10.000 SM</div>
-            <button id="nextEra" class="px-3 py-1 rounded-md glass">▶</button>
-          </div>
+        <!-- NAV STRIP -->
+        <div class="absolute bottom-0 left-0 right-0 z-40 pb-4">
+            <div class="relative max-w-3xl mx-auto">
+                <div id="nav-strip" class="backdrop-blur-md nav-strip overflow-x-auto no-scrollbar flex items-center justify-start md:justify-center gap-6 px-4 py-2 snap-x"></div>
+            </div>
         </div>
-        <div class="fog"></div>
-      </div>
-    </section>
 
-    <!-- Timeline slider -->
-    <section class="mt-8">
-      <h2 class="text-xl font-semibold mb-3">Timeline Periode (Indonesia)</h2>
-      <div id="timeline" class="timeline-scroll flex gap-4 overflow-x-auto py-3 px-1">
-        <!-- tiles injected by JS -->
-      </div>
-    </section>
-
-    <!-- Grid: Gallery / Interactive / Tech Now -->
-    <section class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-      <div class="p-4 glass card rounded-lg">
-        <h3 class="font-semibold mb-2">Galeri Artefak</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-300">Koleksi ilustrasi alat, candi, dan peta. (Contoh: kapak genggam, gerabah, arsitektur candi).</p>
-        <div class="mt-3 flex gap-2">
-          <button class="px-3 py-2 rounded-md border text-sm" onclick="openGallery()">Buka Galeri</button>
-        </div>
-      </div>
-
-      <div class="p-4 glass card rounded-lg">
-        <h3 class="font-semibold mb-2">Interaktif & Kuis</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-300">Mini quiz untuk menguji pemahaman. Dapatkan lencana (badge) apabila benar.</p>
-        <div class="mt-3 flex gap-2">
-          <button id="openQuiz" class="px-3 py-2 rounded-md bg-yellow-400 text-sm font-semibold">Mulai Kuis</button>
-        </div>
-      </div>
-
-      <div class="p-4 glass card rounded-lg">
-        <h3 class="font-semibold mb-2">Teknologi Now</h3>
-        <p class="text-sm text-gray-600 dark:text-gray-300">Bahas inovasi digital Indonesia: AI, IoT, VR, robotika, dan integrasinya dalam pendidikan.</p>
-        <div class="mt-3">
-          <button class="px-3 py-2 rounded-md border text-sm" onclick="openTech()">Pelajari</button>
-        </div>
-      </div>
-    </section>
-
-    <footer class="mt-10 mb-16 text-center text-sm text-gray-500">
-      © 2025 — Perjalanan Evolusi Indonesia • Ideal untuk sekolah & museum digital
-    </footer>
-  </main>
-
-  <!-- Modal: Learn More -->
-  <div id="modal" class="fixed inset-0 hidden items-center justify-center z-50">
-    <div class="absolute inset-0 bg-black/40" onclick="closeModal()"></div>
-    <div class="relative max-w-2xl w-full p-6 bg-white dark:bg-[#071827] rounded-xl shadow-lg">
-      <button class="absolute top-3 right-3 text-gray-600 dark:text-gray-200" onclick="closeModal()">✖</button>
-      <h3 id="modalTitle" class="text-xl font-semibold mb-2"></h3>
-      <div id="modalBody" class="text-gray-700 dark:text-gray-200"></div>
-    </div>
-  </div>
-
-  <!-- Quiz Modal -->
-  <div id="quizModal" class="fixed inset-0 hidden items-center justify-center z-50">
-    <div class="absolute inset-0 bg-black/50" onclick="closeQuiz()"></div>
-    <div class="relative max-w-xl w-full p-6 bg-white dark:bg-[#071827] rounded-xl shadow-lg">
-      <button class="absolute top-3 right-3 text-gray-600 dark:text-gray-200" onclick="closeQuiz()">✖</button>
-      <h3 class="text-xl font-semibold mb-3">Mini Quiz — Kuis Cepat</h3>
-      <div id="quizContent"></div>
-      <div id="quizResult" class="mt-3 text-sm"></div>
-    </div>
-  </div>
-
-  <!-- Small scripts -->
-  <script>
-  /* -------------------------
-     Data: timeline entries
-     ------------------------- */
-  const ERAS = [
-    { id:0, key:"paleolitikum", title:"Zaman Paleolitikum", period:"± 600.000 – 10.000 SM", desc:"Masa berburu & mengumpul, alat batu kasar (kapak genggam).", lat:-2.5, lng:118 },
-    { id:1, key:"mesolitikum", title:"Zaman Mesolitikum", period:"10.000 – 2.500 SM", desc:"Adaptasi lingkungan, alat lebih halus dan pola hidup semi-nomaden.", lat:-7.5, lng:110 },
-    { id:2, key:"neolitikum", title:"Zaman Neolitikum", period:"2.500 – 500 SM", desc:"Pertanian, rumah tetap, gerabah, domestikasi.", lat:-6, lng:106 },
-    { id:3, key:"megalitikum", title:"Zaman Megalitikum", period:"±2.500 SM – 1500 M", desc:"Pembangunan struktur batu besar (megalit) dan ritual lokal.", lat:-7.0, lng:110 },
-    { id:4, key:"nusantara", title:"Kerajaan Nusantara", period:"(Kutai hingga Majapahit)", desc:"Kerajaan-kerajaan maritim, perdagangan, kebudayaan Hindu-Buddha & Islam.", lat:-7.5, lng:112 },
-    { id:5, key:"penjajahan", title:"Penjajahan & Pergerakan Nasional", period:"Abad ke-16 – 1945", desc:"Pengaruh kolonial, pergerakan nasional, lahirnya kesadaran kemerdekaan.", lat:-6.1751, lng:106.8650 },
-    { id:6, key:"kemerdekaan", title:"Kemerdekaan RI", period:"1945 – Sekarang", desc:"Proklamasi 1945, pembangunan negara, perjalanan demokrasi.", lat:-6.2, lng:106.8 },
-    { id:7, key:"globalisasi", title:"Era Globalisasi Modern", period:"1990-an – 2010-an", desc:"Keterhubungan global, migrasi budaya, ekonomi & teknologi.", lat:-6.9, lng:110.4 },
-    { id:8, key:"digital", title:"Era Digital & Teknologi", period:"2010 – Kini", desc:"AI, IoT, robotika, VR, dan inovasi teknologi di Indonesia.", lat:-6.1, lng:106.8 },
-  ];
-
-  /* -------------------------
-     Build timeline UI
-     ------------------------- */
-  const timelineEl = document.getElementById('timeline');
-  ERAS.forEach((era,i)=>{
-    const tile = document.createElement('div');
-    tile.className = 'min-w-[260px] p-4 rounded-xl glass card cursor-pointer';
-    tile.innerHTML = `
-      <div class="flex items-start justify-between">
-        <div>
-          <h4 class="font-semibold">${era.title}</h4>
-          <div class="text-xs text-gray-500 dark:text-gray-300">${era.period}</div>
-        </div>
-        <div class="text-sm text-gray-600 dark:text-gray-200">${i+1}</div>
-      </div>
-      <p class="mt-3 text-sm text-gray-600 dark:text-gray-300">${era.desc}</p>
-      <div class="mt-4"><button class="px-3 py-1 rounded-md border text-sm" data-era="${era.id}">Pelajari</button></div>
-    `;
-    timelineEl.appendChild(tile);
-
-    tile.querySelector('button').addEventListener('click', ()=> {
-      jumpToEra(era.id);
-      showModal(era);
-    });
-
-    // click entire tile also jumps
-    tile.addEventListener('click', (e)=>{
-      if (e.target.tagName.toLowerCase() !== 'button') {
-        jumpToEra(era.id);
-      }
-    });
-  });
-
-  /* -------------------------
-     Modal functions
-     ------------------------- */
-  const modal = document.getElementById('modal');
-  const modalTitle = document.getElementById('modalTitle');
-  const modalBody = document.getElementById('modalBody');
-
-  function showModal(era){
-    modalTitle.textContent = `${era.title} • ${era.period}`;
-    modalBody.innerHTML = `<p class="mb-2">${era.desc}</p>
-      <ul class="text-sm text-gray-600 dark:text-gray-300 pl-4 list-disc">
-        <li>Contoh artefak: Kapak genggam / gerabah.</li>
-        <li>Lokasi contoh: wilayah ${Math.round(era.lat*10)/10}°S, ${Math.round(era.lng*10)/10}°E (ilustrasi).</li>
-        <li>Mini-fakta: Pelajari lebih lanjut lewat kuis interaktif.</li>
-      </ul>
-    `;
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-  }
-  function closeModal(){ modal.classList.add('hidden'); modal.classList.remove('flex'); }
-
-  document.getElementById('learnBtn').addEventListener('click', ()=> {
-    showModal({title:"Tentang Website", period:"-","desc":"Website ini adalah prototipe pembelajaran interaktif: timeline, globe 3D, narasi suara (TTS), modal informasi, dan kuis. Cocok untuk pelajar 10–20 tahun."});
-  });
-
-  /* -------------------------
-     Dark mode toggle
-     ------------------------- */
-  const modeToggle = document.getElementById('modeToggle');
-  let isDark = false;
-  modeToggle.addEventListener('click', ()=> {
-    isDark = !isDark;
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      modeToggle.textContent = '☀️ Mode Siang';
-    } else {
-      document.documentElement.classList.remove('dark');
-      modeToggle.textContent = '🌙 Mode Malam';
-    }
-  });
-
-  /* -------------------------
-     Simple Speech Narration (Web Speech API)
-     ------------------------- */
-  const audioBtn = document.getElementById('audioBtn');
-  audioBtn.addEventListener('click', ()=> {
-    speakCurrentEra();
-  });
-
-  function speak(text){
-    if (!('speechSynthesis' in window)) { alert('Web Speech API tidak didukung di browser ini.'); return; }
-    window.speechSynthesis.cancel();
-    const utter = new SpeechSynthesisUtterance(text);
-    utter.lang = 'id-ID';
-    utter.rate = 0.95;
-    window.speechSynthesis.speak(utter);
-  }
-
-  function speakCurrentEra(){
-    const era = ERAS[currentEra];
-    speak(`${era.title}. Periode ${era.period}. ${era.desc}`);
-  }
-
-  /* -------------------------
-     3D Globe (Three.js) - simple gradient sphere + markers
-     ------------------------- */
-  const canvas = document.getElementById('globe-canvas');
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(canvas.clientWidth || 600, canvas.clientHeight || 480, false);
-
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-  camera.position.set(0,0,3.6);
-
-  // lights
-  const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 0.9);
-  scene.add(hemi);
-  const dir = new THREE.DirectionalLight(0xffffff, 0.6);
-  dir.position.set(5,3,5);
-  scene.add(dir);
-
-  // create canvas texture with gradient (no external image)
-  function makeEarthTexture(){
-    const c = document.createElement('canvas');
-    c.width = 1024; c.height = 512;
-    const ctx = c.getContext('2d');
-    // background gradient
-    const g = ctx.createLinearGradient(0,0,0,512);
-    g.addColorStop(0,'#88c2ff');
-    g.addColorStop(0.6,'#3b6b86');
-    g.addColorStop(1,'#0b2340');
-    ctx.fillStyle = g;
-    ctx.fillRect(0,0,1024,512);
-    // subtle noise / 'land' simplified blobs (stylized, safe for kids)
-    ctx.fillStyle = 'rgba(230,200,150,0.12)';
-    for (let i=0;i<30;i++){
-      const x = Math.random()*1024, y = Math.random()*512, r = 20+Math.random()*120;
-      ctx.beginPath();
-      ctx.ellipse(x,y,r, r*0.6, Math.random()*Math.PI, 0,Math.PI*2);
-      ctx.fill();
-    }
-    return new THREE.CanvasTexture(c);
-  }
-
-  const globeGeo = new THREE.SphereGeometry(1.3, 64, 64);
-  const globeMat = new THREE.MeshStandardMaterial({
-    map: makeEarthTexture(),
-    roughness: 0.8,
-    metalness: 0.05
-  });
-  const globe = new THREE.Mesh(globeGeo, globeMat);
-  scene.add(globe);
-
-  // wireframe halo
-  const wire = new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.SphereGeometry(1.32, 32, 32)), new THREE.LineBasicMaterial({color:0xffffff, opacity:0.06, transparent:true}));
-  scene.add(wire);
-
-  // markers (small spheres)
-  const markerGroup = new THREE.Group();
-  scene.add(markerGroup);
-  function latLngToVector3(lat, lon, radius){
-    // lat, lon in degrees (lat south negative)
-    const phi = (90 - lat) * (Math.PI/180);
-    const theta = (lon + 180) * (Math.PI/180);
-    const x = - (radius) * Math.sin(phi) * Math.cos(theta);
-    const y = (radius) * Math.cos(phi);
-    const z = (radius) * Math.sin(phi) * Math.sin(theta);
-    return new THREE.Vector3(x,y,z);
-  }
-  ERAS.forEach((era, i)=>{
-    const mGeo = new THREE.SphereGeometry(0.03, 10, 10);
-    const mMat = new THREE.MeshStandardMaterial({emissive:0xd4af37, emissiveIntensity: 0.7, color:0xfff3d6});
-    const m = new THREE.Mesh(mGeo, mMat);
-    const v = latLngToVector3(-era.lat, era.lng, 1.31); // note: era.lat stored as negative for S
-    m.position.copy(v);
-    markerGroup.add(m);
-  });
-
-  // animation loop
-  let lastTime = 0;
-  function animate(t){
-    requestAnimationFrame(animate);
-    const dt = (t - lastTime)/1000 || 0.016;
-    lastTime = t;
-    // slow rotation
-    globe.rotation.y += 0.02 * dt;
-    wire.rotation.y += 0.015 * dt;
-    // slight marker bob
-    markerGroup.children.forEach((m,idx)=>{
-      m.position.normalize().multiplyScalar(1.31 + Math.sin(t/700 + idx)*0.005);
-    });
-    renderer.render(scene, camera);
-  }
-  animate();
-
-  // resizing
-  function onResize(){
-    const w = canvas.clientWidth;
-    const h = canvas.clientHeight || Math.min(window.innerHeight*0.5, 480);
-    renderer.setSize(w,h,false);
-    camera.aspect = w/h;
-    camera.updateProjectionMatrix();
-  }
-  window.addEventListener('resize', onResize);
-  onResize();
-
-  /* -------------------------
-     Era navigation logic
-     ------------------------- */
-  let currentEra = 0;
-  const eraLabel = document.getElementById('eraLabel');
-  function updateEraLabel(){
-    const e = ERAS[currentEra];
-    eraLabel.textContent = `${e.title} • ${e.period}`;
-  }
-  updateEraLabel();
-
-  // rotate globe to focus marker: smooth animation
-  function rotateTo(lat, lon, duration = 800){
-    // compute target y-rotation from longitude (approx)
-    // Note: because our sphere rotates around Y, we can target by longitude
-    const targetY = (lon / 180) * Math.PI; // rough mapping
-    // normalize current and target
-    const start = globe.rotation.y % (Math.PI*2);
-    let end = -targetY;
-    // choose shortest direction
-    while (end - start > Math.PI) end -= Math.PI*2;
-    while (end - start < -Math.PI) end += Math.PI*2;
-    const t0 = performance.now();
-    function tick(now){
-      const p = Math.min(1, (now - t0)/duration);
-      const eased = easeInOutCubic(p);
-      globe.rotation.y = start + (end - start) * eased;
-      if (p < 1) requestAnimationFrame(tick);
-    }
-    requestAnimationFrame(tick);
-  }
-  function easeInOutCubic(x){ return x<0.5 ? 4*x*x*x : 1 - Math.pow(-2*x+2,3)/2; }
-
-  function jumpToEra(index){
-    currentEra = Math.max(0, Math.min(ERAS.length-1, index));
-    updateEraLabel();
-    const era = ERAS[currentEra];
-    // rotate to marker
-    rotateTo(era.lng, era.lat, 900);
-    // highlight marker by briefly scaling
-    const m = markerGroup.children[currentEra];
-    animateMarkerPop(m);
-    // scroll timeline to show selected tile
-    const tiles = Array.from(timelineEl.children);
-    const tile = tiles[currentEra];
-    if (tile) tile.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
-  }
-  function animateMarkerPop(mesh){
-    const start = performance.now();
-    const base = mesh.scale.x;
-    function pop(t){
-      const p = Math.min(1, (t - start)/400);
-      const s = 1 + Math.sin(p * Math.PI) * 0.6;
-      mesh.scale.set(s,s,s);
-      if (p < 1) requestAnimationFrame(pop);
-      else mesh.scale.set(1,1,1);
-    }
-    requestAnimationFrame(pop);
-  }
-
-  // prev/next
-  document.getElementById('prevEra').addEventListener('click', ()=> jumpToEra(currentEra-1));
-  document.getElementById('nextEra').addEventListener('click', ()=> jumpToEra(currentEra+1));
-
-  // keyboard arrows
-  window.addEventListener('keydown', (e)=> {
-    if (e.key === 'ArrowLeft') jumpToEra(currentEra-1);
-    if (e.key === 'ArrowRight') jumpToEra(currentEra+1);
-  });
-
-  // Start button jump to first era
-  document.getElementById('startBtn').addEventListener('click', ()=> {
-    jumpToEra(0);
-    // smooth scroll to timeline
-    timelineEl.scrollIntoView({behavior:'smooth', block:'center'});
-  });
-
-  // click on canvas to open modal for current era
-  canvas.addEventListener('click', ()=> showModal(ERAS[currentEra]));
-
-  /* -------------------------
-     Simple Gallery & Tech placeholders
-     ------------------------- */
-  function openGallery(){
-    showModal({title:"Galeri Artefak", period:"-","desc":"Galeri ini berisi ilustrasi artefak: kapak genggam, gerabah Neolitikum, relief candi, peta kuno, dan lainnya. (Versi penuh bisa ditambahkan dengan gambar dan deskripsi)."});
-  }
-  function openTech(){
-    showModal({title:"Teknologi & Inovasi Indonesia", period:"Era Digital", "desc":"Topik: AI di pendidikan, robotika lokal, IoT untuk pertanian, VR museum, startup teknologi pendidikan Indonesia."});
-  }
-
-  /* -------------------------
-     Quiz — simple 3-question flow with badge
-     ------------------------- */
-  const quizModal = document.getElementById('quizModal');
-  const quizContent = document.getElementById('quizContent');
-  const quizResult = document.getElementById('quizResult');
-  const openQuizBtn = document.getElementById('openQuiz');
-
-  const QUIZ = [
-    { q:"Zaman apakah yang identik dengan alat batu kasar seperti kapak genggam?", choices:["Neolitikum","Mesolitikum","Paleolitikum","Megalitikum"], a:2 },
-    { q:"Periode Neolitikum ditandai oleh ...", choices:["Pertanian & gerabah","Bangunan megalit","Perdagangan maritim","Mesin digital"], a:0 },
-    { q:"Salah satu inovasi modern di Indonesia adalah ...", choices:["VR edukasi","Kapak genggam","Rumah panggung tradisional","Gerabah keramik"], a:0 },
-  ];
-
-  openQuizBtn.addEventListener('click', ()=> openQuiz());
-
-  function openQuiz(){
-    quizModal.classList.remove('hidden'); quizModal.classList.add('flex');
-    currentQuizIndex = 0;
-    score = 0;
-    quizResult.textContent = '';
-    renderQuiz();
-  }
-  function closeQuiz(){ quizModal.classList.add('hidden'); quizModal.classList.remove('flex'); }
-
-  let currentQuizIndex = 0;
-  let score = 0;
-
-  function renderQuiz(){
-    const item = QUIZ[currentQuizIndex];
-    quizContent.innerHTML = `
-      <div><strong>Soal ${currentQuizIndex+1} / ${QUIZ.length}</strong></div>
-      <div class="mt-3 text-gray-700 dark:text-gray-200">${item.q}</div>
-      <div class="mt-3 space-y-2">
-        ${item.choices.map((c,i)=>`<button class="w-full text-left px-3 py-2 rounded-md border choice-btn" data-choice="${i}">${String.fromCharCode(65+i)}. ${c}</button>`).join('')}
-      </div>
-    `;
-    document.querySelectorAll('.choice-btn').forEach(b=>{
-      b.addEventListener('click', ()=>{
-        const ch = Number(b.dataset.choice);
-        const correct = (ch === item.a);
-        if (correct) { score++; b.classList.add('bg-green-100'); }
-        else { b.classList.add('bg-red-100'); document.querySelectorAll('.choice-btn')[item.a].classList.add('bg-green-100'); }
-        // disable others
-        document.querySelectorAll('.choice-btn').forEach(x=>x.disabled=true);
-        setTimeout(()=> {
-          currentQuizIndex++;
-          if (currentQuizIndex < QUIZ.length) renderQuiz();
-          else finishQuiz();
-        }, 900);
-      });
-    });
-  }
-
-  function finishQuiz(){
-    quizContent.innerHTML = `<div class="text-lg font-semibold">Selesai!</div>
-      <div class="mt-2">Skor Anda: <strong>${score} / ${QUIZ.length}</strong></div>
-      <div class="mt-3">${score === QUIZ.length ? '<div class="badge inline-block">Badge: Historian Junior</div>' : '<div class="text-sm text-gray-600">Coba lagi untuk dapat badge.</div>'}</div>
-      <div class="mt-4"><button class="px-3 py-2 rounded-md border" onclick="closeQuiz()">Tutup</button></div>
-    `;
-  }
-
-  /* -------------------------
-     Helpers: click outside to close modal etc (already set)
-     ------------------------- */
-
-  // initial jump to first era for demo subtlety
-  setTimeout(()=> jumpToEra(0), 400);
-
-  </script>
+    </main>
+ 
+    <!-- SCRIPT -->
+    <script src="js/script.js"></script>
 </body>
 </html>
