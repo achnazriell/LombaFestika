@@ -1,84 +1,122 @@
 <!DOCTYPE html>
 <html lang="id" class="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jejak Manusia Nusantara - Interactive History</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jejak Manusia Nusantara - Interactive History</title>
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+        <!-- Tailwind -->
+        <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+            rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-</head>
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="css/style.css">
+    </head>
 
-<body class="antialiased selection:bg-gold selection:text-black">
+    <body class="antialiased selection:bg-gold selection:text-black">
 
-    <!-- Background -->
-    <div class="stars"></div>
-    <div class="fixed inset-0 bg-radial-glow pointer-events-none z-0"></div>
+        <!-- Background -->
+        <div class="stars"></div>
+        <div class="fixed inset-0 bg-radial-glow pointer-events-none z-0"></div>
 
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 text-center py-6 animate-fade-in-down">
-        <div class="flex justify-between items-center px-8 max-w-7xl mx-auto">
-            <div class="text-gold font-serif font-bold text-xl tracking-widest">JEJAK.ID</div>
-            <nav class="hidden md:flex space-x-8 text-sm font-medium text-gray-400">
-                <a href="#" class="hover:text-white transition-colors">Beranda</a>
-                <a href="#" class="hover:text-white transition-colors text-white">Timeline</a>
-                <a href="#" class="hover:text-white transition-colors">Quiz</a>
-                <a href="#" class="hover:text-white transition-colors">Tentang</a>
-            </nav>
-            <div class="w-8 h-8 rounded-full bg-gray-800 border border-gray-600 flex items-center justify-center text-xs">ID</div>
-        </div>
-    </header>
+        <!-- Header -->
+        <header
+            class="fixed top-0 left-0 right-0 z-50 text-center py-6 animate-fade-in-down">
+            <div
+                class="flex justify-between items-center px-8 max-w-7xl mx-auto">
+                <div
+                    class="text-gold font-serif font-bold text-md md:text-xl tracking-widest">JEJAK.ID</div>
+                <nav
+                    class="hidden md:flex space-x-8 text-sm font-medium text-gray-400 ">
+                    <a href="index.html"
+                        class="hover:text-white active:text-white transition-colors">Beranda</a>
+                    <a href="#"
+                        class="hover:text-white active:text-white transition-colors">Quiz</a>
+                    <a href="#"
+                        class="hover:text-white active:text-white transition-colors">Tentang</a>
+                </nav>
+        </header>
 
-    <!-- MAIN CONTENT -->
-    <main class="relative h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-24 z-10">
-        
-        <div class="text-center z-30 transition-all duration-500" id="title-container">
-            <h1 id="era-title" class="text-5xl md:text-7xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 drop-shadow-2xl mb-2">
-                Paleolitikum
-            </h1>
-            <p id="era-year" class="text-gold text-lg md:text-xl font-mono tracking-widest opacity-90">
-                ±2 juta – 12.000 SM
-            </p>
-            <p id="era-desc" class="text-gray-400 max-w-lg mx-auto mt-4 text-sm md:text-base font-light leading-relaxed opacity-0 translate-y-4 transition-all duration-700 delay-100">
-                Zaman Batu Tua. Manusia hidup nomaden, berburu, dan mengumpulkan makanan.
-            </p>
-        </div>
+        <!-- MAIN CONTENT -->
+        <main
+            class="relative h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-24 z-10">
 
-        <!-- ROTATING PLANET WHEEL -->
-        <div id="planet-wheel"></div>
-
-        <!-- ARROWS -->
-        <div class="absolute bottom-12 left-0 right-0 z-50 flex justify-between px-8 md:px-24 pointer-events-none">
-            <button onclick="rotate(-1)" class="pointer-events-auto w-14 h-14 rounded-full border border-white/20 bg-black/30 backdrop-blur-md flex items-center justify-center hover:bg-white/10 hover:border-gold transition-all group">
-                <svg class="w-6 h-6 text-gray-400 group-hover:text-gold transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                </svg>
-            </button>
-            <button onclick="rotate(1)" class="pointer-events-auto w-14 h-14 rounded-full border border-white/20 bg-black/30 backdrop-blur-md flex items-center justify-center hover:bg-white/10 hover:border-gold transition-all group">
-                <svg class="w-6 h-6 text-gray-400 group-hover:text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
-                </svg>
-            </button>
-        </div>
-
-        <!-- NAV STRIP -->
-        <div class="absolute bottom-0 left-0 right-0 z-40 pb-4">
-            <div class="relative max-w-3xl mx-auto">
-                <div id="nav-strip" class="backdrop-blur-md nav-strip overflow-x-auto no-scrollbar flex items-center justify-start md:justify-center gap-6 px-4 py-2 snap-x"></div>
+            <div class="text-center z-30 transition-all duration-500"
+                id="title-container">
+                <h1 id="era-title"
+                    class="text-3xl md:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 drop-shadow-2xl mb-2">
+                    Paleolitikum
+                </h1>
+                <p id="era-year"
+                    class="text-gold text-md md:text-xl font-mono tracking-widest opacity-90">
+                    ±2 juta – 12.000 SM
+                </p>
+                <p id="era-desc"
+                    class="text-gray-400 px-3 max-w-lg mx-auto mt-4 text-xs md:text-base font-light leading-relaxed opacity-0 translate-y-4 transition-all duration-700 delay-100">
+                    Zaman Batu Tua. Manusia hidup nomaden, berburu, dan
+                    mengumpulkan makanan.
+                </p>
             </div>
-        </div>
 
-    </main>
- 
-    <!-- SCRIPT -->
-    <script src="js/script.js"></script>
-</body>
+            <!-- ROTATING PLANET WHEEL -->
+            <div id="planet-wheel"
+                class="transform-gpu will-change-transform"></div>
+                
+            <!-- MODAL -->
+            <div id="info-modal"
+                class="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300">
+                <div
+                    class="bg-white/10 border border-white/20 backdrop-blur-xl p-6 rounded-xl max-w-md text-center shadow-xl">
+                    <h2 id="modal-title"
+                        class="text-2xl font-bold text-white mb-4"></h2>
+                    <p id="modal-desc" class="text-gray-200"></p>
+
+                    <button onclick="closeModal()"
+                        class="mt-6 px-4 py-2 rounded-lg bg-white/20 text-white hover:bg-white/30 transition">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+
+            <!-- ARROWS -->
+            <div
+                class="absolute bottom-12 left-0 right-0 z-50 flex justify-between px-8 md:px-24 pointer-events-none">
+                <button onclick="rotate(-1)"
+                    class="pointer-events-auto w-14 h-14 rounded-full border border-white/20 bg-black/30 backdrop-blur-md flex items-center justify-center hover:bg-white/10 hover:border-gold transition-all group">
+                    <svg
+                        class="w-6 h-6 text-gray-400 group-hover:text-gold transform rotate-180"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+                <button onclick="rotate(1)"
+                    class="pointer-events-auto w-14 h-14 rounded-full border border-white/20 bg-black/30 backdrop-blur-md flex items-center justify-center hover:bg-white/10 hover:border-gold transition-all group">
+                    <svg class="w-6 h-6 text-gray-400 group-hover:text-gold"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- NAV STRIP -->
+            <div class="absolute bottom-0 left-0 right-0 z-40 pb-4">
+                <div class="relative max-w-3xl mx-auto">
+                    <div id="nav-strip"
+                        class="backdrop-blur-md nav-strip overflow-x-auto no-scrollbar flex items-center justify-start md:justify-center gap-6 px-4 py-2 snap-x"></div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- SCRIPT -->
+        <script src="js/script.js"></script>
+    </body>
 </html>
