@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Quiz Sejarah - Humanity</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet" href="css/style.css">
+        <style>
+            body {
+    overflow-y: auto !important;
+  }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-slide-in {
+      animation: slideIn 0.4s ease-out forwards;
+    }
+    .progress-bar {
+      transition: width 0.3s ease;
+    }
+  </style>
+    </head>
+    <body
+        class="antialiased selection:bg-gold selection:text-black min-h-screen relative">
+
+        <!-- Background -->
+        <div class="stars"></div>
+        <div class="fixed inset-0 bg-radial-glow pointer-events-none z-0"></div>
+
+        <!-- Header yang sama seperti index.html dengan active state di Quiz -->
+        <header
+            class="fixed top-0 left-0 right-0 z-50 text-center py-6 animate-fade-in-down backdrop-blur-md">
+            <div
+                class="flex justify-between items-center px-8 max-w-7xl mx-auto">
+                <div
+                    class="text-gold font-serif font-bold text-md md:text-xl tracking-widest">Humanity</div>
+                <nav
+                    class="hidden md:flex space-x-8 text-sm font-medium text-gray-400 justify-center mx-auto">
+
+                    <a href="index.html"
+                        class="hover:text-white transition-colors">Beranda</a>
+                    <a href="quiz.html"
+                        class="text-white transition-colors">Quiz</a>
+                    <a href="about.html"
+                        class="hover:text-white transition-colors">Tentang</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main content dengan desain yang lebih menarik -->
+        <main
+            class="relative min-h-screen w-full flex flex-col items-center justify-center px-4 pt-24 pb-10 z-10 overflow-y-auto">
+
+            <!-- Title section dengan animasi -->
+            <div class="text-center mb-8 animate-slide-in">
+                <h1
+                    class="text-2xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 drop-shadow-2xl mb-3">
+                    Quiz Sejarah Manusia
+                </h1>
+                <p class="text-gray-400 text-sm md:text-base">Uji pengetahuanmu
+                    tentang perjalanan sejarah umat manusia</p>
+            </div>
+
+            <!-- Progress bar -->
+            <div class="w-full max-w-3xl mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-sm text-gray-400 font-mono">Pertanyaan
+                        <span id="current-question">1</span> dari <span
+                            id="total-questions">10</span></span>
+                    <span class="text-sm text-gold font-mono"><span
+                            id="current-score">0</span> poin</span>
+                </div>
+                <div
+                    class="w-full h-2 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm border border-white/20">
+                    <div id="progress-bar"
+                        class="progress-bar h-full bg-yellow-500 rounded-full"
+                        style="width: 10%"></div>
+                </div>
+            </div>
+
+            <!-- Quiz box dengan desain card yang lebih menarik -->
+            <div id="quiz-box"
+                class="w-full max-w-3xl bg-black/40 backdrop-blur-xl p-8 md:p-10 rounded-3xl shadow-2xl border-2 border-white/20 animate-slide-in">
+
+                <!-- Question number badge -->
+                <div
+                    class="inline-block px-4 py-1 bg-gold/20 border border-gold/40 rounded-full mb-6">
+                    <span class="text-gold text-sm font-mono">Pertanyaan #<span
+                            id="question-number">1</span></span>
+                </div>
+
+                <h2 id="question"
+                    class="text-xl md:text-2xl font-semibold mb-8 text-white leading-relaxed">
+                    Pertanyaan tampil di sini...
+                </h2>
+
+                <div id="answers" class="space-y-4">
+                    <!-- Jawaban akan di-generate oleh JavaScript -->
+                </div>
+
+                <div class="mt-8 flex justify-between items-center">
+                    <button
+                        id="skip-btn"
+                        onclick="skipQuestion()"
+                        class="px-6 py-3 bg-white/10 text-gray-400 rounded-xl font-semibold hover:bg-white/20 hover:text-white transition-all border border-white/20">
+                        Lewati
+                    </button>
+                    <button
+                        id="next-btn"
+                        onclick="nextQuestion()"
+                        disabled
+                        class="px-8 py-3 bg-white/10 text-gray-400 rounded-xl font-semibold hover:bg-white/20 hover:text-white transition-all  disabled:cursor-not-allowed shadow-lg shadow-gold/20">
+                        Lanjut →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result box dengan desain yang lebih menarik -->
+            <div id="result-box"
+                class="hidden w-full max-w-3xl bg-black/40 backdrop-blur-xl p-10 md:p-12 rounded-3xl shadow-2xl border-2 border-gold/40 text-center animate-slide-in">
+
+                <!-- Trophy icon -->
+                <div class="mb-6">
+                    <div
+                        class="w-24 h-24 mx-auto bg-gradient-to-br from-gold to-yellow-600 rounded-full flex items-center justify-center shadow-2xl shadow-gold/40">
+                        <svg class="w-12 h-12 text-black" fill="currentColor"
+                            viewBox="0 0 20 20">
+                            <path
+                                d="M10 3.5a1.5 1.5 0 013 0V4a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-.5a1.5 1.5 0 00-1.5 1.5v.5h-11v-.5A1.5 1.5 0 005.5 10H5a1 1 0 01-1-1V6a1 1 0 011-1h3a1 1 0 001-1v-.5a1.5 1.5 0 013 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <h2
+                    class="text-3xl md:text-4xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 mb-4">
+                    Quiz Selesai!
+                </h2>
+
+                <div
+                    class="my-8 py-6 px-8 bg-white/5 rounded-2xl border border-white/20">
+                    <p class="text-5xl font-bold text-gold mb-2"><span
+                            id="final-score">0</span>/<span
+                            id="final-total">10</span></p>
+                    <p class="text-gray-400 text-sm">Skor Akhir</p>
+                </div>
+
+                <p id="score-message"
+                    class="text-xl text-gray-300 mb-8 leading-relaxed"></p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button
+                        onclick="restartQuiz()"
+                        class="px-8 py-3 bg-yellow-500 text-black rounded-xl font-bold hover:bg-yellow-400 transition-all shadow-lg shadow-gold/20">
+                        🔄 Ulangi Quiz
+                    </button>
+                    <a
+                        href="index.html"
+                        class="px-8 py-3 bg-white/10 text-white rounded-xl font-bold hover:bg-white/20 transition-all border border-white/20">
+                        🏠 Kembali ke Beranda
+                    </a>
+                </div>
+            </div>
+
+        </main>
+
+        <script>
+    const questions = [
+      {
+        q: "Pada Zaman Prasejarah, manusia belum memiliki tulisan. Apa metode utama mereka bertahan hidup?",
+        a: ["Berburu dan meramu", "Bercocok tanam modern", "Mengolah logam", "Membangun kota besar"],
+        c: 0
+      },
+      {
+        q: "Kapak genggam pada Zaman Batu digunakan terutama untuk...",
+        a: ["Pertanian intensif", "Memburu dan memotong makanan", "Menulis simbol awal", "Membuat bangunan besar"],
+        c: 1
+      },
+      {
+        q: "Perkembangan penting pada Zaman Logam adalah...",
+        a: ["Penemuan tembaga dan perunggu", "Awal penulisan digital", "Penggunaan mesin uap", "Penggunaan baja industri"],
+        c: 0
+      },
+      {
+        q: "Peradaban Yunani dan Romawi berkembang pada era...",
+        a: ["Zaman Digital", "Klasik & Kekaisaran", "Abad Pertengahan", "Modern Awal"],
+        c: 1
+      },
+      {
+        q: "Apa yang menjadi ciri utama Abad Pertengahan di Eropa?",
+        a: ["Feodalisme dan kerajaan besar", "Kemunculan internet", "Revolusi mesin uap", "Penjelajahan luar angkasa"],
+        c: 0
+      },
+      {
+        q: "Renaisans dikenal sebagai masa...",
+        a: ["Kemandekan budaya", "Kebangkitan ilmu pengetahuan dan seni", "Awal penggunaan logam", "Awal feodalisme"],
+        c: 1
+      },
+      {
+        q: "Revolusi Industri membawa perubahan besar dalam...",
+        a: ["Penggunaan batu serpih", "Mesin uap dan pabrik", "Sistem barter", "Penemuan huruf paku"],
+        c: 1
+      },
+      {
+        q: "Era Modern Awal ditandai oleh perkembangan apa?",
+        a: ["Komputer pertama, perang dunia, dan globalisasi", "Penggunaan kapak genggam", "Awal bercocok tanam", "Mesin uap besar"],
+        c: 0
+      },
+      {
+        q: "Apa ciri utama Era Digital & Informasi?",
+        a: ["Penemuan roda", "Internet, smartphone, dan kecerdasan buatan", "Penggunaan besi awal", "Awal kerajaan Eropa"],
+        c: 1
+      },
+      {
+        q: "Mana berikut ini yang menunjukkan perkembangan manusia dari dulu hingga sekarang secara benar?",
+        a: ["Digital → Prasejarah → Industri", "Logam Awal → Klasik → Pertengahan → Renaisans", "Modern Awal → Klasik → Prasejarah", "Kekaisaran → Batu Tua → Digital"],
+        c: 1
+      }
+    ];
+
+    let index = 0;
+    let score = 0;
+    let answered = false;
+
+    function updateProgress() {
+      const progress = ((index + 1) / questions.length) * 100;
+      document.getElementById('progress-bar').style.width = progress + '%';
+      document.getElementById('current-question').textContent = index + 1;
+      document.getElementById('total-questions').textContent = questions.length;
+      document.getElementById('question-number').textContent = index + 1;
+      document.getElementById('current-score').textContent = score;
+    }
+
+    function loadQuestion() {
+      answered = false;
+      const q = questions[index];
+      const questionEl = document.getElementById("question");
+      const answersBox = document.getElementById("answers");
+      
+      // Fade out
+      questionEl.style.opacity = '0';
+      answersBox.style.opacity = '0';
+      
+      setTimeout(() => {
+        questionEl.textContent = q.q;
+        answersBox.innerHTML = "";
+
+        q.a.forEach((text, i) => {
+          const btn = document.createElement("button");
+          btn.className = "w-full text-left px-6 py-4 bg-white/10 hover:bg-white/20 rounded-xl transition-all border-2 border-white/20 hover:border-gold/50 group backdrop-blur-sm";
+          btn.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="text-white group-hover:text-gold transition-colors">${text}</span>
+              <span class="w-6 h-6 rounded-full border-2 border-white/40 group-hover:border-gold transition-colors"></span>
+            </div>
+          `;
+          btn.onclick = () => selectAnswer(i);
+          answersBox.appendChild(btn);
+        });
+
+        // Fade in
+        questionEl.style.opacity = '1';
+        answersBox.style.opacity = '1';
+        questionEl.style.transition = 'opacity 0.3s';
+        answersBox.style.transition = 'opacity 0.3s';
+      }, 300);
+
+      document.getElementById('next-btn').disabled = true;
+      updateProgress();
+    }
+
+    function selectAnswer(i) {
+      if (answered) return;
+      answered = true;
+
+      const correct = questions[index].c;
+      const answers = document.querySelectorAll("#answers button");
+
+      answers.forEach((btn, idx) => {
+        btn.disabled = true;
+        btn.classList.remove("hover:bg-white/20", "hover:border-gold/50");
+
+        const circle = btn.querySelector('span:last-child');
+        
+        if (idx === correct) {
+          btn.classList.add("bg-green-600/30", "border-green-500");
+          btn.querySelector('span:first-child').classList.add('text-green-400');
+          circle.classList.add('bg-green-500', 'border-green-500');
+          circle.innerHTML = '<svg class="w-4 h-4 text-white mx-auto mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>';
+        } else if (idx === i) {
+          btn.classList.add("bg-red-600/30", "border-red-500");
+          btn.querySelector('span:first-child').classList.add('text-red-400');
+          circle.classList.add('bg-red-500', 'border-red-500');
+          circle.innerHTML = '<svg class="w-4 h-4 text-white mx-auto mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>';
+        } else {
+          btn.classList.add("bg-white/5", "opacity-50");
+        }
+      });
+
+      if (i === correct) {
+        score++;
+        updateProgress();
+      }
+
+      document.getElementById('next-btn').disabled = false;
+    }
+
+    function skipQuestion() {
+      if (!answered) {
+        answered = true;
+        const answers = document.querySelectorAll("#answers button");
+        const correct = questions[index].c;
+        
+        answers.forEach((btn, idx) => {
+          btn.disabled = true;
+          if (idx === correct) {
+            btn.classList.add("bg-yellow-600/30", "border-yellow-500");
+            btn.querySelector('span:first-child').classList.add('text-yellow-400');
+          } else {
+            btn.classList.add("opacity-50");
+          }
+        });
+
+        document.getElementById('next-btn').disabled = false;
+      }
+    }
+
+    function nextQuestion() {
+      if (index < questions.length - 1) {
+        index++;
+        loadQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    function finishQuiz() {
+      document.getElementById("quiz-box").classList.add("hidden");
+      document.getElementById("result-box").classList.remove("hidden");
+
+      document.getElementById('final-score').textContent = score;
+      document.getElementById('final-total').textContent = questions.length;
+
+      const percentage = (score / questions.length) * 100;
+      let message = "";
+
+      if (percentage === 100) {
+        message = "🎉 Sempurna! Kamu adalah ahli sejarah sejati!";
+      } else if (percentage >= 80) {
+        message = "👏 Luar biasa! Pengetahuan sejarahmu sangat baik!";
+      } else if (percentage >= 60) {
+        message = "👍 Bagus! Kamu memiliki pemahaman yang solid tentang sejarah.";
+      } else if (percentage >= 40) {
+        message = "📚 Cukup baik! Masih ada ruang untuk belajar lebih banyak.";
+      } else {
+        message = "💪 Jangan menyerah! Coba lagi dan pelajari lebih dalam tentang sejarah.";
+      }
+
+      document.getElementById('score-message').textContent = message;
+    }
+
+    function restartQuiz() {
+      index = 0;
+      score = 0;
+      document.getElementById("result-box").classList.add("hidden");
+      document.getElementById("quiz-box").classList.remove("hidden");
+      loadQuestion();
+    }
+
+    // Load pertanyaan pertama
+    loadQuestion();
+  </script>
+        <script>
+        // Deteksi nama file yang sedang dibuka
+        const currentPage = window.location.pathname.split("/").pop();
+
+        // Cari semua <a> dalam navbar
+        document.querySelectorAll("nav a").forEach(link => {
+                 const href = link.getAttribute("href");
+
+         // Cocokkan halaman saat ini
+        if (href === currentPage) {
+             link.classList.add("nav-active");
+        }
+        });
+    </script>
+    </body>
+</html>

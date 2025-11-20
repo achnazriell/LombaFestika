@@ -10,7 +10,8 @@ body {
   /* Center horizontally, push down to show only top arc */
   left: 50%;
   top: 75vh;
-  width: 550vh; /* Huge size for gentle curve */
+  width: 550vh;
+  /* Huge size for gentle curve */
   height: 550vh;
   transform-origin: center center;
   transform: translate(-50%, 0) rotate(0deg);
@@ -28,16 +29,20 @@ body {
   top: 0;
   left: 50%;
   width: 0;
-  height: 50%; /* Half the wheel radius */
+  height: 50%;
+  /* Half the wheel radius */
   transform-origin: bottom center;
-  pointer-events: none; /* Let clicks pass through to controls */
+  pointer-events: none;
+  /* Let clicks pass through to controls */
 }
 
 /* Content inside the slot (The Person/Artifacts) */
 .era-content {
   position: absolute;
-  top: -290px; /* Position above the wheel surface */
-  left: -150px; /* Center horizontally relative to slot line */
+  top: -290px;
+  /* Position above the wheel surface */
+  left: -150px;
+  /* Center horizontally relative to slot line */
   width: 300px;
   height: 400px;
   display: flex;
@@ -67,13 +72,21 @@ body {
   justify-content: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   animation: float 6s ease-in-out infinite;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.artifact:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-15px);
   }
@@ -102,11 +115,13 @@ body {
 .nav-btn {
   transition: all 0.3s ease;
 }
+
 .nav-btn.active {
   color: #515151ff !important;
   background: #ffd700 !important;
   padding: 0.5rem 1.25rem !important;
-  border-radius: 9999px !important; /* biar tetap rounded-full */
+  border-radius: 9999px !important;
+  /* biar tetap rounded-full */
   font-weight: 600;
 }
 
@@ -119,6 +134,7 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -132,5 +148,30 @@ body {
   width: 900px;
   height: 900px;
   overflow: visible;
-  pointer-events: none;  /* supaya slot masih bisa di-hover */
+  pointer-events: none;
+  /* supaya slot masih bisa di-hover */
+}
+
+.nav-active {
+  color: white !important;
+  border-bottom: 2px solid #ffd700;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #c3a35b;
+  border-radius: 10px;
+}
+
+.era-slot .era-content,
+.era-slot img,
+.era-slot .artifact {
+  pointer-events: auto !important;
 }
