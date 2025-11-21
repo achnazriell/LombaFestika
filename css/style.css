@@ -2,6 +2,7 @@ body {
   background-color: #050505;
   color: #e2e8f0;
   overflow: hidden;
+  user-select: none;
 }
 
 /* The Massive Rotating Wheel (The "Dataran") - NOT MODIFIED */
@@ -351,8 +352,16 @@ button:active {
 }
 
 #nav-strip {
-  padding-left: 80F0px;
-  padding-right: 0px;
+  padding-left: 800px;
+  padding-right: 80px;
+}
+
+/* Mobile (max-width 768px) */
+@media (max-width: 768px) {
+  #nav-strip {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
 
 

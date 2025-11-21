@@ -1,3 +1,4 @@
+
 const eras = [
   {
     name: "Zaman Prasejarah",
@@ -377,8 +378,11 @@ function init() {
     })
 
     let figuresHtml = ""
-    era.figures.forEach((fig) => {
-      figuresHtml += `<img src="${fig}" style="width: 450px; height: auto; object-fit: contain; margin-bottom: -20px; pointer-events: none;" />`
+    era.figures.forEach((fig, i) => {
+
+      const fileName = fig.split("/").pop()
+
+      figuresHtml += `<img src="${fig}"  onclick="openModal('${fileName}', event)" style="width: 450px; height: auto; object-fit: contain; margin-bottom: -20px; pointer-events: none;" />`
     })
 
     slot.innerHTML = `
@@ -475,46 +479,53 @@ function updateUI() {
 }
 
 function openModal(fileName, event) {
-  event.stopPropagation()
-  const era = eras[currIndex]
-  const description = era.details[fileName] || "Deskripsi tidak tersedia."
+  event?.stopPropagation();
 
-  const modal = document.getElementById("info-modal")
-  const modalCard = document.getElementById("modal-card")
-  const modalImg = document.getElementById("modal-img")
-  const modalTitle = document.getElementById("modal-title")
-  const modalDesc = document.getElementById("modal-desc")
+  const era = eras[currIndex];
 
-  const imagePath = `assets/img/${fileName}`
-  const title = fileName.replace(/_/g, " ").replace(".png", "")
+  // Cek apakah fileName ada di details (artefak)
+  // atau figures (tokoh)
+  const description =
+    era.details?.[fileName] ||
+    era.figures?.[fileName] ||
+    "Deskripsi tidak tersedia.";
 
-  modalImg.src = imagePath
-  modalTitle.textContent = title
-  modalDesc.textContent = description
+  const modal = document.getElementById("info-modal");
+  const modalCard = document.getElementById("modal-card");
+  const modalImg = document.getElementById("modal-img");
+  const modalTitle = document.getElementById("modal-title");
+  const modalDesc = document.getElementById("modal-desc");
 
-  modal.style.opacity = "1"
-  modal.style.pointerEvents = "auto"
+  const imagePath = `assets/img/${fileName}`;
+  const title = fileName.replace(/_/g, " ").replace(".png", "");
 
-  if (modalTimeout) clearTimeout(modalTimeout)
-  modalTimeout = setTimeout(() => {
-    modalCard.style.opacity = "1"
-    modalCard.style.transform =
-      "translate(-50%, -50%) scale(1)" + (window.innerWidth >= 768 ? " md:translate(-50%, -50%)" : "")
-  }, 50)
+  modalImg.src = imagePath;
+  modalTitle.textContent = title;
+  modalDesc.textContent = description;
+
+  // Show modal
+  modal.style.opacity = "1";
+  modal.style.pointerEvents = "auto";
+
+  // Animasi
+  if (window.modalTimeout) clearTimeout(window.modalTimeout);
+  window.modalTimeout = setTimeout(() => {
+    modalCard.style.opacity = "1";
+    modalCard.style.transform = "translate(-50%, -50%) scale(1)";
+  }, 50);
 }
 
 function closeModal() {
-  const modal = document.getElementById("info-modal")
-  const modalCard = document.getElementById("modal-card")
+  const modal = document.getElementById("info-modal");
+  const modalCard = document.getElementById("modal-card");
 
-  modalCard.style.opacity = "0"
-  modalCard.style.transform =
-    "translate(-50%, -50%) scale(0.95)" + (window.innerWidth >= 768 ? " md:translate(-50%, -50%)" : "")
+  modalCard.style.opacity = "0";
+  modalCard.style.transform = "translate(-50%, -50%) scale(0.95)";
 
   setTimeout(() => {
-    modal.style.opacity = "0"
-    modal.style.pointerEvents = "none"
-  }, 300)
+    modal.style.opacity = "0";
+    modal.style.pointerEvents = "none";
+  }, 300);
 }
 
 function openEraModal(index) {
@@ -573,5 +584,6 @@ function closeEraModal() {
     modal.style.pointerEvents = "none"
   }, 300)
 }
+
 
 init()
