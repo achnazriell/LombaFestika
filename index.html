@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Humanity</title>
+        <title>Humanity - Perjalanan Sejarah Manusia</title>
 
         <!-- Tailwind -->
         <script src="https://cdn.tailwindcss.com"></script>
@@ -27,162 +27,203 @@
 
         <!-- Header -->
         <header
-            class="fixed top-0 left-0 right-0 z-10 text-center py-6 animate-fade-in-down">
+            class="fixed top-0 left-0 right-0 z-[9999] text-center py-4 md:py-6 animate-fade-in-down backdrop-blur-sm bg-black/20">
             <div
-                class="flex justify-between items-center px-8 max-w-7xl mx-auto">
+                class="flex justify-between items-center px-6 md:px-8 max-w-7xl mx-auto">
                 <div
-                    class="text-gold font-serif font-bold text-md md:text-xl tracking-widest">Humanity</div>
+                    class="text-gold font-serif font-bold text-lg md:text-xl tracking-widest drop-shadow-lg">
+                    Humanity
+                </div>
+                
+                <!-- Improved burger button with smooth animation -->
                 <button id="burger"
-                    class="md:hidden text-white text-3xl focus:outline-none">
-                    ☰
+                    class="md:hidden text-white text-2xl focus:outline-none z-[99999] relative transition-transform duration-300 hover:scale-110 active:scale-95">
+                    <span class="burger-icon">☰</span>
                 </button>
 
+                <!-- Desktop Navigation -->
                 <nav
                     class="hidden md:flex space-x-8 text-sm font-medium text-gray-400 justify-center mx-auto">
-
                     <a href="index.html"
-                        class="hover:text-white transition-colors">Beranda</a>
+                        class="hover:text-gold transition-all duration-300 relative group">
+                        <span>Beranda</span>
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+                    </a>
                     <a href="quiz.html"
-                        class="hover:text-white transition-colors">Quiz</a>
+                        class="hover:text-gold transition-all duration-300 relative group">
+                        <span>Quiz</span>
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+                    </a>
                     <a href="about.html"
-                        class="hover:text-white transition-colors">Tentang</a>
+                        class="hover:text-gold transition-all duration-300 relative group">
+                        <span>Tentang</span>
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full"></span>
+                    </a>
                 </nav>
             </div>
         </header>
 
+        <!-- Mobile Navigation - Fullscreen with blur and centered menu -->
         <div id="mobile-nav"
-            class="hidden flex-col bg-black/80 backdrop-blur-md text-white p-6 space-y-4
-           fixed top-20 right-4 rounded-xl border border-white/10 z-50 md:hidden">
-            <a href="index.html" class="hover:text-gold">Beranda</a>
-            <a href="quiz.html" class="hover:text-gold">Quiz</a>
-            <a href="about.html" class="hover:text-gold">Tentang</a>
+            class="fixed inset-0 bg-black/95 backdrop-blur-2xl text-white
+           opacity-0 pointer-events-none transition-all duration-500 z-[99998] md:hidden
+           flex flex-col items-center justify-center">
+            
+            <div class="text-center space-y-8 animate-menu-items">
+                <a href="index.html" 
+                   class="block text-3xl font-serif hover:text-gold transition-all duration-300 transform hover:scale-110 opacity-0 animate-fade-in-up"
+                   style="animation-delay: 0.1s">
+                    Beranda
+                </a>
+                <a href="quiz.html" 
+                   class="block text-3xl font-serif hover:text-gold transition-all duration-300 transform hover:scale-110 opacity-0 animate-fade-in-up"
+                   style="animation-delay: 0.2s">
+                    Quiz
+                </a>
+                <a href="about.html" 
+                   class="block text-3xl font-serif hover:text-gold transition-all duration-300 transform hover:scale-110 opacity-0 animate-fade-in-up"
+                   style="animation-delay: 0.3s">
+                    Tentang
+                </a>
+            </div>
+
+            <!-- Decorative Elements -->
+            <div class="absolute bottom-10 left-0 right-0 text-center">
+                <p class="text-gray-500 text-sm font-light tracking-widest">HUMANITY</p>
+            </div>
         </div>
 
         <!-- MAIN CONTENT -->
         <main
-            class="relative h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-24 z-10">
+            class="relative h-screen w-full overflow-hidden flex flex-col items-center justify-start pt-20 md:pt-24 z-10">
 
-            <div class="text-center z-30 transition-all duration-500"
+            <!-- Enhanced title container with better animations and responsiveness -->
+            <div class="text-center z-30 transition-all duration-500 px-4 max-w-4xl mx-auto"
                 id="title-container">
                 <h1 id="era-title"
                     onclick="openEraModal(currIndex)"
-                    class="text-3xl md:text-5xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-b from-white to-gray-400 drop-shadow-2xl mb-2 cursor-pointer">
+                    class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-400 drop-shadow-2xl mb-2 md:mb-3 cursor-pointer hover:scale-105 transition-transform duration-300">
                     Zaman Prasejarah
                 </h1>
 
                 <p id="era-year"
-                    class="text-gold text-md md:text-xl font-mono tracking-widest opacity-90">
+                    class="text-gold text-sm sm:text-base md:text-xl font-mono tracking-widest opacity-90 drop-shadow-lg">
                     ±2,5 juta – 3.000 SM
                 </p>
+                
                 <p id="era-desc"
-                    class="text-gray-400 px-3 max-w-lg mx-auto mt-4 text-xs md:text-base font-light leading-relaxed opacity-0 translate-y-4 transition-all duration-700 delay-100">
+                    class="text-gray-400 px-4 md:px-6 max-w-2xl mx-auto mt-3 md:mt-4 text-xs sm:text-sm md:text-base font-light leading-relaxed opacity-0 translate-y-4 transition-all duration-700 delay-100">
                     Era tertua dalam sejarah manusia. Ditandai oleh penggunaan
                     alat batu awal, kehidupan nomaden, berburu dan meramu.
                 </p>
             </div>
-            <!-- ARROWS -->
+
+            <!-- Improved arrow buttons with better mobile sizing -->
             <div
-                class="absolute bottom-12 left-0 right-0 z-50 flex justify-between px-8 md:px-24 pointer-events-none">
+                class="absolute bottom-24 md:bottom-12 left-0 right-0 z-50 flex justify-between px-6 md:px-24 pointer-events-none">
                 <button onclick="rotate(-1)"
-                    class="pointer-events-auto w-14 h-14 rounded-full border border-white/20 bg-black/30 backdrop-blur-md flex items-center justify-center hover:bg-white/10 hover:border-gold transition-all group">
+                    class="pointer-events-auto w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-white/30 bg-black/40 backdrop-blur-md flex items-center justify-center hover:bg-white/20 hover:border-gold hover:shadow-lg hover:shadow-gold/20 transition-all duration-300 group active:scale-95">
                     <svg
-                        class="w-6 h-6 text-gray-400 group-hover:text-gold transform rotate-180"
+                        class="w-5 h-5 md:w-6 md:h-6 text-gray-300 group-hover:text-gold transform rotate-180 transition-colors duration-300"
                         fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                 </button>
                 <button onclick="rotate(1)"
-                    class="pointer-events-auto w-14 h-14 rounded-full border border-white/20 bg-black/30 backdrop-blur-md flex items-center justify-center hover:bg-white/10 hover:border-gold transition-all group">
-                    <svg class="w-6 h-6 text-gray-400 group-hover:text-gold"
+                    class="pointer-events-auto w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-white/30 bg-black/40 backdrop-blur-md flex items-center justify-center hover:bg-white/20 hover:border-gold hover:shadow-lg hover:shadow-gold/20 transition-all duration-300 group active:scale-95">
+                    <svg class="w-5 h-5 md:w-6 md:h-6 text-gray-300 group-hover:text-gold transition-colors duration-300"
                         fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                 </button>
             </div>
+
             <!-- ROTATING PLANET WHEEL -->
             <div id="planet-wheel"
                 class="transform-gpu will-change-transform"></div>
 
-            <!-- MODAL DETAIL ZAMAN -->
+            <!-- Enhanced modal with better mobile responsiveness -->
             <div id="era-modal"
-                class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 z-50"
+                class="fixed inset-0 bg-black/60 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-50"
                 onclick="closeEraModal()">
 
                 <div id="era-modal-card"
-                    class="absolute left-1/2 top-0 -translate-x-1/2 
-        w-[420px] max-h-[560px]
+                    class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+        w-[90%] sm:w-[420px] max-h-[80vh] sm:max-h-[560px]
         bg-gradient-to-b from-[#111] to-[#222]
-        border border-white/10 rounded-2xl shadow-2xl
-        overflow-hidden opacity-0 -translate-y-10 transition-all duration-500"
+        border border-white/20 rounded-2xl shadow-2xl
+        overflow-hidden opacity-0 scale-95 transition-all duration-500"
                     onclick="event.stopPropagation()">
 
                     <!-- Scroll Area -->
                     <div
-                        class="p-6 overflow-y-auto max-h-[560px] custom-scroll">
+                        class="p-5 md:p-6 overflow-y-auto max-h-[80vh] sm:max-h-[560px] custom-scroll">
 
                         <!-- Title -->
                         <h2 id="era-modal-title"
-                            class="text-3xl font-bold text-gold text-center mb-4 tracking-wide">
+                            class="text-2xl md:text-3xl font-bold text-gold text-center mb-4 tracking-wide font-serif">
                         </h2>
 
                         <!-- Divider -->
-                        <p id="era-modal-pengertian"></p>
+                        <div class="w-full h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent mb-4"></div>
+                        
+                        <p id="era-modal-pengertian" class="text-gray-300 text-sm md:text-base leading-relaxed mb-4"></p>
 
-                        <div>
-                            <h3 class="text-gold font-bold mb-1">Ciri-Ciri:</h3>
+                        <div class="mb-4">
+                            <h3 class="text-gold font-bold mb-2 text-base md:text-lg">Ciri-Ciri:</h3>
                             <ul id="era-modal-ciri"
-                                class="list-disc ml-5 space-y-1"></ul>
+                                class="list-disc ml-5 space-y-1 text-gray-300 text-sm md:text-base"></ul>
                         </div>
 
-                        <div>
-                            <h3 class="text-gold font-bold mb-1">Perkembangan
+                        <div class="mb-4">
+                            <h3 class="text-gold font-bold mb-2 text-base md:text-lg">Perkembangan
                                 Teknologi:</h3>
                             <ul id="era-modal-teknologi"
-                                class="list-disc ml-5 space-y-1"></ul>
+                                class="list-disc ml-5 space-y-1 text-gray-300 text-sm md:text-base"></ul>
                         </div>
 
                         <div>
-                            <h3 class="text-gold font-bold mb-1">Perubahan
+                            <h3 class="text-gold font-bold mb-2 text-base md:text-lg">Perubahan
                                 Budaya:</h3>
                             <ul id="era-modal-budaya"
-                                class="list-disc ml-5 space-y-1"></ul>
+                                class="list-disc ml-5 space-y-1 text-gray-300 text-sm md:text-base"></ul>
                         </div>
 
                     </div>
                 </div>
             </div>
 
-            <!-- MODAL (Right Side Professional Card) -->
+            <!-- Enhanced info modal with better positioning and animations -->
             <div id="info-modal"
-                class="fixed inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-all duration-300 z-50"
+                class="fixed inset-0 bg-black/60 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300 z-50"
                 onclick="closeModal()">
 
                 <div id="modal-card"
-                    class="absolute right-6 top-1/2 -translate-y-1/2 
-        w-[350px] max-h-[520px]
+                    class="absolute left-1/2 md:left-auto md:right-6 top-1/2 -translate-x-1/2 md:translate-x-0 -translate-y-1/2 
+        w-[90%] sm:w-[350px] max-h-[80vh] sm:max-h-[520px]
         bg-gradient-to-br from-[#141414] to-[#222] 
-        border border-white/10 rounded-2xl shadow-2xl
+        border border-white/20 rounded-2xl shadow-2xl
         overflow-hidden opacity-0 scale-95 transition-all duration-300"
                     onclick="event.stopPropagation()">
 
                     <!-- Image -->
                     <div
-                        class="w-full h-48 bg-black/20 flex items-center justify-center overflow-hidden border-b border-white/10">
+                        class="w-full h-40 md:h-48 bg-black/20 flex items-center justify-center overflow-hidden border-b border-white/10">
                         <img id="modal-img" src
                             class="max-h-full object-contain drop-shadow-2xl" />
                     </div>
 
                     <!-- Inner Scroll Area -->
                     <div
-                        class="p-6 overflow-y-auto max-h-[280px] custom-scroll">
+                        class="p-5 md:p-6 overflow-y-auto max-h-[calc(80vh-10rem)] sm:max-h-[280px] custom-scroll">
 
                         <!-- Title -->
                         <h2 id="modal-title"
-                            class="text-2xl font-bold text-gold text-center mb-3 uppercase tracking-wide">
+                            class="text-xl md:text-2xl font-bold text-gold text-center mb-3 uppercase tracking-wide font-serif">
                         </h2>
 
                         <!-- Divider -->
@@ -199,36 +240,72 @@
                 </div>
             </div>
 
-            <!-- NAV STRIP -->
-            <div class="absolute bottom-0 left-0 right-0 z-40 pb-4">
-                <div class="relative max-w-3xl mx-auto">
+            <!-- Enhanced navigation strip with better mobile responsiveness -->
+            <div class="absolute bottom-0 left-0 right-0 z-40 pb-3 md:pb-4">
+                <div class="relative max-w-3xl mx-auto px-2">
                     <div id="nav-strip"
-                        class="backdrop-blur-md nav-strip overflow-x-auto no-scrollbar flex items-center justify-start md:justify-center gap-6 px-4 py-2 snap-x"></div>
+                        class="backdrop-blur-md nav-strip overflow-x-auto no-scrollbar flex items-center justify-start md:justify-center gap-3 md:gap-6 px-3 md:px-4 py-2 snap-x"></div>
                 </div>
             </div>
 
         </main>
+
         <script>
             // Deteksi nama file yang sedang dibuka
             const currentPage = window.location.pathname.split("/").pop();
 
             // Cari semua <a> dalam navbar
             document.querySelectorAll("nav a").forEach(link => {
-                 const href = link.getAttribute("href");
+                const href = link.getAttribute("href");
 
-            // Cocokkan halaman saat ini
-            if (href === currentPage) {
-                link.classList.add("nav-active");
-            }
+                // Cocokkan halaman saat ini
+                if (href === currentPage) {
+                    link.classList.add("nav-active");
+                }
             });
 
             const burger = document.getElementById("burger");
-const mobileNav = document.getElementById("mobile-nav");
+            const mobileNav = document.getElementById("mobile-nav");
+            const burgerIcon = document.querySelector(".burger-icon");
 
-burger.addEventListener("click", () => {
-    mobileNav.classList.toggle("hidden");
-});
+            burger.addEventListener("click", () => {
+                const isOpen = mobileNav.classList.contains("menu-open");
+                
+                if (isOpen) {
+                    // Close menu
+                    mobileNav.classList.remove("menu-open");
+                    mobileNav.style.opacity = "0";
+                    mobileNav.style.pointerEvents = "none";
+                    burgerIcon.textContent = "☰";
+                    document.body.style.overflow = "hidden"; // Keep overflow hidden
+                } else {
+                    // Open menu
+                    mobileNav.classList.add("menu-open");
+                    mobileNav.style.opacity = "1";
+                    mobileNav.style.pointerEvents = "auto";
+                    burgerIcon.textContent = "✕";
+                    document.body.style.overflow = "hidden";
+                    
+                    // Animate menu items
+                    const menuItems = mobileNav.querySelectorAll("a");
+                    menuItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = "1";
+                            item.style.transform = "translateY(0)";
+                        }, index * 100);
+                    });
+                }
+            });
 
+            // Close mobile menu when clicking a link
+            document.querySelectorAll("#mobile-nav a").forEach(link => {
+                link.addEventListener("click", () => {
+                    mobileNav.classList.remove("menu-open");
+                    mobileNav.style.opacity = "0";
+                    mobileNav.style.pointerEvents = "none";
+                    burgerIcon.textContent = "☰";
+                });
+            });
         </script>
 
         <!-- SCRIPT -->
