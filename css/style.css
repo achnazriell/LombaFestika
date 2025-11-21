@@ -170,6 +170,17 @@ body {
   border-radius: 10px;
 }
 
+.custom-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: #8883;
+  border-radius: 10px;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #aaa6;
+}
+
 .era-slot .era-content,
 .era-slot img,
 .era-slot .artifact {
