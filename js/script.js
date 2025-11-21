@@ -334,6 +334,17 @@ const eras = [
   },
 ]
 
+// 2. Fungsi update era
+function updateEra(index) {
+    const era = eras[index];
+
+    const tex = document.getElementById("texture");
+    tex.src = era.texture;
+
+    const preload = new Image();
+    preload.src = era.texture;
+}
+
 let currIndex = 0
 let isScrolling = false
 const totalEras = eras.length
@@ -585,5 +596,7 @@ function closeEraModal() {
   }, 300)
 }
 
-
 init()
+document.addEventListener("DOMContentLoaded", () => {
+    updateEra(0); // Munculkan texture pertama saat page dibuka
+});
