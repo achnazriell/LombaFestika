@@ -6,7 +6,10 @@ const eras = [
     texture: "assets/img/prasejarah.png",
     desc: "Era tertua dalam sejarah manusia. Ditandai oleh penggunaan alat batu awal, kehidupan nomaden, berburu dan meramu.",
     artifacts: ["assets/img/kapak_genggam_&_alat_serpih_batu.png", "assets/img/Gua_Aman_Purba.png", "assets/img/Aktivitas_Harian_Pra-Sejarah.png"],
-    details: { /* tetap seperti yang sudah ada */ },
+    details: {
+      "manusia_pra-sejarah.png": "Figur ini menggambarkan manusia purba pemburu-peramu. Mereka hidup dalam kelompok kecil (10–40 orang), berpindah mengikuti musim dan ketersediaan hewan buruan. Dengan kemampuan membuat alat batu dan api, mereka mulai mengembangkan pola hidup sosial, berbagi makanan, serta ritual sederhana. Gaya hidup nomaden ini menjadi fondasi perkembangan budaya manusia.",
+      "kapak_genggam_&_alat_serpih_batu.png": "Alat batu merupakan inovasi paling penting pada era ini. Kapak genggam digunakan untuk memotong daging, menguliti hewan, menghancurkan tulang, memecah kayu, hingga membentuk alat lain. Alat serpih digunakan sebagai pisau tajam serbaguna. Teknologi ini membuat kemampuan bertahan hidup meningkat drastis, memudahkan manusia menyebar ke berbagai benua.", "Gua_Aman_Purba.png": "Tempat tinggal (Gua dan Shelter Sementara): Gua-gua seperti \"Gua Aman Purba\" berfungsi sebagai tempat berlindung dari cuaca dan pemangsa. Fosil dan arsip arkeologis menunjukkan bahwa gua juga dipakai untuk ritual, penyimpanan makanan, dan tempat tinggal sementara selama migrasi musiman.", "Aktivitas_Harian_Pra-Sejarah.png": "Kegiatan utama meliputi berburu hewan besar, meramu buah-buahan, membuat alat batu, memasak dengan api, dan membuat pigmen. Aktivitas ini membentuk kebiasaan sosial seperti pembagian peran, kerja sama kelompok, dan transmisi pengetahuan antargenerasi."
+    },
     figures: ["assets/img/manusia_pra-sejarah.png"],
     info: {
       pengertian: "Zaman prasejarah adalah periode sebelum manusia mengenal tulisan. Aktivitas manusia saat itu berfokus pada bertahan hidup dan penggunaan alat sederhana.",
@@ -36,7 +39,7 @@ const eras = [
     texture: "assets/img/logam.png",
     desc: "Manusia mulai mengenal tembaga dan perunggu. Munculnya peradaban awal seperti Mesir Kuno, Mesopotamia, dan Indus.",
     artifacts: ["assets/img/Kapak_Perunggu,_Tombak_Metal,_Cermin_Logam.png", "assets/img/Permukiman_Awal_Berstruktur_(Rumah_Kayu_&_Lumpur).png", "assets/img/Pertanian,_Pengairan,_&_Perdagangan.png"],
-    details: { /* tetap seperti yang sudah ada */ },
+    details: { "Manusia_Zaman_Perunggu_&_Tembaga.png": "Figur ini merepresentasikan masyarakat yang sudah mengenal metalurgi. Mereka hidup dalam desa besar, membentuk pemerintahan awal, dan mengembangkan perdagangan antarwilayah. Pakaian sudah berbahan kain tenun, dan struktur sosial mulai kompleks.", "Kapak_Perunggu,_Tombak_Metal,_Cermin_Logam.png": "Alat dan senjata (Kapak Genggam): Kapak genggam dan alat serpih yang dibuat dari batu silika atau kuarsit merupakan teknologi utama pada Paleolitikum. Alat-alat ini digunakan untuk memotong daging, memecah tulang, dan membentuk kayu. Kapak genggam meningkatkan efisiensi berburu dan pemrosesan makanan, memungkinkan sebaran manusia ke habitat yang lebih luas.", "Permukiman_Awal_Berstruktur_(Rumah_Kayu_&_Lumpur).png": "Rumah berbentuk kotak, berdinding lumpur, kayu, atau batu. Permukiman terdiri dari rumah-rumah berdekatan, lumbung, bengkel logam, dan pusat perdagangan. Di sinilah muncul kota pertama dalam sejarah.", "Pertanian,_Pengairan,_&_Perdagangan.png": "Masyarakat mulai menanam gandum, jelai, padi, memelihara sapi, kambing, dan menggunakan sistem irigasi. Aktivitas perdagangan jarak jauh muncul, membawa pertukaran ide dan budaya.", },
     figures: ["assets/img/Manusia_Zaman_Perunggu_&_Tembaga.png"],
     info: {
       pengertian: "Periode ini ditandai manusia mulai memanfaatkan logam untuk membuat alat dan senjata, serta membangun permukiman terstruktur.",
@@ -65,7 +68,7 @@ const eras = [
     texture: "assets/img/besi.png",
     desc: "Penggunaan besi berkembang pesat. Muncul peradaban Yunani, Romawi, Persia, dan Tiongkok klasik.",
     artifacts: ["assets/img/Pedang_Besi,_Perisai,Baju_Zirah.png", "assets/img/Arsitektur_Batu_&_Kayu_(Rumah_Kota_Kekaisaran).png", "assets/img/Pendidikan,_Filsafat,_Militer,_dan_Perdagangan_Besar.png"],
-    details: { /* tetap seperti yang sudah ada */ },
+    details: { "Tokoh_Era_Yunani–Romawi–Tiongkok.png": "Representasi manusia dari peradaban Yunani, Romawi, dan Tiongkok Dinasti Han, yang mengenakan pakaian tenun berkualitas, hidup dalam kota besar yang terstruktur, dan berperan sebagai filsuf, prajurit, ilmuwan, serta birokrat. Ketiga peradaban ini meletakkan dasar hukum modern, matematika, sains, militer profesional, dan sistem politik yang berpengaruh hingga masa kini.", "Pedang_Besi,_Perisai,Baju_Zirah.png": "Besi menggantikan perunggu sebagai bahan dasar senjata, menghasilkan pedang yang lebih kuat, perisai yang tahan benturan, dan baju zirah yang melindungi dari senjata jarak dekat maupun panah. Inovasi ini memungkinkan kerajaan memperluas wilayah, memperkuat pertahanan, dan menciptakan pasukan profesional seperti Legiun Romawi dan infanteri Han.", "Arsitektur_Batu_&_Kayu_(Rumah_Kota_Kekaisaran).png": "Rumah-rumah kota memiliki struktur batu bata, atap genteng, dan tata kota rapi. Bangunan publik seperti Forum Romawi, Colosseum, aquaduct, pagoda Tiongkok, serta istana kekaisaran menunjukkan kemajuan arsitektur dan teknologi sipil yang menjadi dasar perkembangan kota modern.", "Pendidikan,_Filsafat,_Militer,_dan_Perdagangan_Besar.png": "Era ini merupakan puncak perkembangan ilmu dan budaya: filsafat Yunani, hukum dan teknik sipil Romawi, serta astronomi dan birokrasi Tiongkok. Perdagangan melalui Jalur Sutra berkembang, pasukan militer sangat terorganisir, dan akademi serta perpustakaan tumbuh di kota-kota besar." },
     figures: ["assets/img/Tokoh_Era_Yunani–Romawi–Tiongkok.png"],
     info: {
       pengertian: "Periode klasik adalah zaman berkembangnya kerajaan besar, militer profesional, ilmu pengetahuan, dan hukum sebagai dasar peradaban maju.",
@@ -94,7 +97,7 @@ const eras = [
     texture: "assets/img/pertengahan.png",
     desc: "Era kerajaan besar, feodalisme, dan penyebaran agama dunia. Terjadi perang salib dan awal renaisans.",
     artifacts: ["assets/img/Pedang_Salib,_Perisai,Busur_Panjang.png", "assets/img/Kastil_&_Rumah_Desa.png", "assets/img/Perdagangan,_Gereja,_dan_Pelatihan_Militer.png"],
-    details: { /* tetap seperti yang sudah ada */ },
+    details: { "Ksatria,_Petani,_dan_Pendeta.png": "Tokoh ini melambangkan sistem feodalisme dengan ksatria sebagai pelindung wilayah, petani sebagai penggarap tanah, dan pendeta sebagai pemimpin spiritual serta penjaga pengetahuan. Tatanan sosial hierarkis ini mengatur kehidupan ekonomi, politik, dan agama masyarakat abad pertengahan.", "Pedang_Salib,_Perisai,Busur_Panjang.png": "Senjata khas masa ini meliputi pedang salib sebagai simbol Perang Salib, busur panjang yang mematikan dalam perang jarak jauh, dan perisai kayu berlapis besi. Teknologi militer ini membentuk strategi pertahanan kastil dan peperangan antar kerajaan di Eropa.", "Kastil_&_Rumah_Desa.png": "Kastil batu berfungsi sebagai pusat kekuasaan dan perlindungan, memiliki menara pengawas, gerbang besi, dan dinding tebal. Sementara itu, rumah rakyat di desa sederhana, dibuat dari kayu, tanah liat, dan jerami, mencerminkan perbedaan kelas sosial yang tajam pada era tersebut.", "Perdagangan,_Gereja,_dan_Pelatihan_Militer.png": "Masyarakat melakukan perdagangan di pasar desa, mengikuti ritual gereja yang menjadi pusat kehidupan sosial, dan menjalani latihan berkuda, pedang, serta panahan bagi ksatria. Gereja juga menjadi pusat pendidikan dan pencatatan sejarah." },
     figures: ["assets/img/Ksatria,_Petani,_dan_Pendeta.png"],
     info: {
       pengertian: "Abad Pertengahan adalah periode dominasi kerajaan dan feodalisme, dengan pengaruh kuat agama dalam kehidupan sosial dan politik.",
@@ -123,7 +126,7 @@ const eras = [
     texture: "assets/img/penjelajahan.png",
     desc: "Kebangkitan ilmu pengetahuan Eropa. Penjelajahan samudra, kolonialisme awal, dan revolusi budaya.",
     artifacts: ["assets/img/Kompas,_Peta,_Teleskop_Awal.png", "assets/img/Kota_Renaisans_Bergaya_Klasik.png", "assets/img/Pelayaran,_Seni_Lukis,_Studi_Anatomi,_Musik.png"],
-    details: { /* tetap seperti yang sudah ada */ },
+    details: { "Seniman,Ilmuwan,_&_Pelaut_Eksplorasi.png": "Menggambarkan seniman, ilmuwan, dan pelaut Eropa abad 15–17 yang memimpin kebangkitan ilmu dan seni. Tokoh-tokoh seperti Leonardo da Vinci, Galileo, dan pelaut penjelajah dunia membawa perubahan besar dalam pengetahuan, teknologi, dan eksplorasi global.", "Kompas,_Peta,_Teleskop_Awal.png": "Kompas magnetik, peta dunia yang semakin akurat, dan teleskop awal memungkinkan penjelajahan samudra serta perkembangan astronomi. Inovasi ini membuka era penemuan benua baru dan jalur perdagangan global.", "Kota_Renaisans_Bergaya_Klasik.png": "Kota pada era Renaisans dipenuhi gedung dengan pilar klasik, kubah megah, jalan berbatu, dan ornamen seni. Arsitektur terinspirasi Romawi kuno, menandai kebangkitan budaya dan estetika Eropa.", "Pelayaran,_Seni_Lukis,_Studi_Anatomi,_Musik.png": "Renaissance menandai pesatnya perkembangan seni lukis realis, studi anatomi manusia, musik klasik awal, percetakan buku, dan ekspedisi laut besar untuk mencari rempah serta membuka rute perdagangan baru" },
     figures: ["assets/img/Seniman,Ilmuwan,_&_Pelaut_Eksplorasi.png"],
     info: {
       pengertian: "Era ini ditandai kebangkitan ilmu pengetahuan, seni, dan penjelajahan global. Eropa mulai menjelajah dunia dan membangun koloni.",
@@ -152,7 +155,7 @@ const eras = [
     texture: "assets/img/industri.png",
     desc: "Transformasi besar dalam teknologi, mesin uap, pabrik, transportasi, dan urbanisasi.",
     artifacts: ["assets/img/Mesin_Uap,_Mesin_Tekstil,_Lokomotif_Awal.png", "assets/img/Kota_Industri.png", "assets/img/Produksi_Massal,_Transportasi,_Teknologi_Baru.png"],
-    details: { /* tetap seperti yang sudah ada */ },
+    details: { "Pekerja_Pabrik_&_Penemu_Mesin_Uap.png": "Figur ini menggambarkan buruh pabrik dan penemu mesin uap yang mengoperasikan mesin tekstil, mesin logam, dan teknologi mekanis lain. Perubahan ini memicu urbanisasi, meningkatnya produksi, dan transformasi sosial besar-besaran.", "Mesin_Uap,_Mesin_Tekstil,_Lokomotif_Awal.png": "Mesin uap meningkatkan efisiensi produksi, mesin tekstil mempercepat pembuatan kain, dan lokomotif pertama memungkinkan transportasi massal jarak jauh. Teknologi ini memulai era industri modern.", "Kota_Industri.png": "Kota era industri memiliki bangunan bata merah, cerobong asap besar, pabrik bising, dan pemukiman buruh padat. Perkembangan pesat ini membawa kemajuan ekonomi, namun juga polusi dan kondisi kerja keras.", "Produksi_Massal,_Transportasi,_Teknologi_Baru.png": "Revolusi industri melahirkan produksi massal dengan assembly line, perkembangan listrik dan lampu, telegraf, serta kendaraan modern seperti kereta api dan kapal uap, mengubah cara manusia bekerja dan bepergian." },
     figures: ["assets/img/Pekerja_Pabrik_&_Penemu_Mesin_Uap.png"],
     info: {
       pengertian: "Periode industrialisasi di mana produksi massal dan mesin menggantikan tenaga manusia, memicu urbanisasi dan perubahan sosial.",
@@ -181,7 +184,7 @@ const eras = [
     texture: "assets/img/modern.png",
     desc: "Perang Dunia, teknologi modern, komputer pertama, globalisasi, dan perkembangan sains cepat.",
     artifacts: ["assets/img/Radio,_Komputer_Pertama,_Kamera,_Mesin_Modern.png", "assets/img/Gedung_Beton,_Apartemen,_Kota_Modern.png", "assets/img/Pendidikan,_Teknologi,_Perang,_dan_Industri.png"],
-    details: { /* tetap seperti yang sudah ada */ },
+    details: { "Peneliti,_Tentara,_dan_Masyarakat_Perkotaan.png": "Tokoh ini merepresentasikan ilmuwan, tentara pada Perang Dunia, dan masyarakat perkotaan modern. Era ini penuh perubahan geopolitik, kemajuan teknologi, dan perkembangan kota besar secara masif.", "Radio,_Komputer_Pertama,_Kamera,_Mesin_Modern.png": "Penemuan radio, kamera, komputer generasi pertama, dan mesin modern memulai era komunikasi massa, komputasi awal, dan teknologi elektronik yang berkembang cepat.", "Gedung_Beton,_Apartemen,_Kota_Modern.png": "Kota modern memiliki gedung bertingkat dari beton, apartemen sebagai hunian utama, jalan raya luas, jembatan besar, serta infrastruktur perkotaan yang mendukung mobilitas tinggi.", "Pendidikan,_Teknologi,_Perang,_dan_Industri.png": "Era ini mencakup perkembangan sains, produksi industri modern, dua perang dunia, teknologi komunikasi global, penerbangan, dan awal eksplorasi luar angkasa." },
     figures: ["assets/img/Peneliti,_Tentara,_dan_Masyarakat_Perkotaan.png"],
     info: {
       pengertian: "Periode modern awal dicirikan oleh perkembangan teknologi modern, perang dunia, dan globalisasi budaya serta ekonomi.",
@@ -210,7 +213,7 @@ const eras = [
     texture: "assets/img/digital.png",
     desc: "Revolusi internet, smartphone, kecerdasan buatan, media sosial, dan percepatan teknologi.",
     artifacts: ["assets/img/Smartphone,_Laptop,_AI_Device,IoT.png", "assets/img/Rumah_Modern_Minimalis_&_Smart_Home.png", "assets/img/Media_Sosial,_Remote_Work,_Belajar_Online,_E-Commerce.png"],
-    details: { /* tetap seperti yang sudah ada */ },
+    details: { "Generasi_Digital_&_Pekerja_Teknologi.png": "Figur ini menampilkan programmer, kreator digital, pekerja remote, dan insinyur AI. Teknologi digital mempengaruhi kehidupan sosial, ekonomi, hiburan, dan pendidikan.", "Smartphone,_Laptop,_AI_Device,IoT.png": "Smartphone, laptop, perangkat AI, dan IoT mengubah cara manusia berkomunikasi, bekerja, belajar, dan mengendalikan rumah pintar. Seluruh aspek kehidupan kini terhubung digital.", "Rumah_Modern_Minimalis_&_Smart_Home.png": "Rumah modern memiliki desain minimalis, dilengkapi lampu otomatis, kamera pintar, sistem keamanan digital, dan perangkat rumah yang terhubung melalui internet.", "Media_Sosial,_Remote_Work,_Belajar_Online,_E-Commerce.png": "Era digital memungkinkan interaksi global real time, pembelajaran daring tanpa batas, pekerjaan jarak jauh, dan belanja online dengan sistem otomatis yang efisien." },
     figures: ["assets/img/Generasi_Digital_&_Pekerja_Teknologi.png"],
     info: {
       pengertian: "Era modern digital adalah masa di mana teknologi informasi, internet, dan kecerdasan buatan mengubah seluruh aspek kehidupan manusia.",
